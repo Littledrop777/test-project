@@ -1,2 +1,2 @@
-# IT-Academy
-Java homework
+# Java homework
+
