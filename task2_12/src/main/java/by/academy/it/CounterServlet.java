@@ -1,16 +1,19 @@
 package by.academy.it;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 @WebServlet(name = "counterServlet", urlPatterns = "/counter")
 public class CounterServlet extends HttpServlet {
-
     private String filePath;
     private int count;
 
@@ -27,12 +30,15 @@ public class CounterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
+        resp.setContentType("image/jpeg");
+        ServletOutputStream out = resp.getOutputStream();
         count++;
-        out.println("<html><head><title>Counter Servlet</title></head>");
-        out.println("<body><h1 align='center'>Total number of visits</h1>");
-        out.println("<h2 align='center'>" + count + "</h2>");
-        out.println("</body></html>");
+        BufferedImage image = new BufferedImage(500,200, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics = image.createGraphics();
+        graphics.setFont(new Font("Serif", Font.ITALIC, 120));
+        graphics.setColor(Color.ORANGE);
+        graphics.drawString(String.valueOf(count), 180, 130);
+        ImageIO.write(image, "jpeg", out);
         writeCount(count);
     }
 
