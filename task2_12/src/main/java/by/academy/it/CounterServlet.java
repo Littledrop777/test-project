@@ -33,11 +33,12 @@ public class CounterServlet extends HttpServlet {
         resp.setContentType("image/jpeg");
         ServletOutputStream out = resp.getOutputStream();
         count++;
-        BufferedImage image = new BufferedImage(500,200, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(700,500, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = image.createGraphics();
-        graphics.setFont(new Font("Serif", Font.ITALIC, 120));
+        graphics.setFont(new Font("Serif", Font.ITALIC, 70));
         graphics.setColor(Color.ORANGE);
-        graphics.drawString(String.valueOf(count), 180, 130);
+        graphics.drawString("Total number of visits",50, 150);
+        graphics.drawString(String.valueOf(count), 300, 300);
         ImageIO.write(image, "jpeg", out);
         writeCount(count);
     }
