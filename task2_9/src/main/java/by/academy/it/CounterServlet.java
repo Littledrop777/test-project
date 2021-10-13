@@ -1,5 +1,6 @@
 package by.academy.it;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,16 +9,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.*;
 
-@WebServlet(name = "counterServlet", urlPatterns = "/counter")
 public class CounterServlet extends HttpServlet {
 
     private String filePath;
     private int count;
 
+
+
     @Override
     public void init() throws ServletException {
         super.init();
-        filePath = getServletContext().getRealPath("/logFile.txt");
+        filePath = getServletContext().getInitParameter("logFile");
         if (readCount() == 0) {
             count = 0;
         } else {

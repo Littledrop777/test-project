@@ -20,7 +20,7 @@ public class CounterServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        filePath = getServletContext().getRealPath("/logFile.txt");
+        filePath = getServletContext().getInitParameter("logFile");
         if (readCount() == 0) {
             count = 0;
         } else {

@@ -7,13 +7,4 @@
         <param-name>logFile</param-name>
         <param-value>count.txt</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>MyServlet</servlet-name>
-        <servlet-class>by.academy.it.CounterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MyServlet</servlet-name>
-        <url-pattern>/counter</url-pattern>
-    </servlet-mapping>
-
 </web-app>
