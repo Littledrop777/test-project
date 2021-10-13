@@ -1,5 +1,6 @@
 package by.academy.it;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,9 +14,9 @@ public class CounterServlet extends HttpServlet {
     private int count;
 
     @Override
-    public void init() throws ServletException {
-        super.init();
-        filePath = getServletContext().getInitParameter("logFile");
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        filePath = config.getInitParameter("logFile");
         if (readCount() == 0) {
             count = 0;
         } else {
