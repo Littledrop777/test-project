@@ -20,27 +20,41 @@ public class CounterServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        filePath = getServletContext().getInitParameter("logFile");
-        if (readCount() == 0) {
-            count = 0;
-        } else {
-            count = readCount();
-        }
+        this.filePath = getServletContext().getInitParameter("logFile").replace("\\", File.separator);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("image/jpeg");
-        ServletOutputStream out = resp.getOutputStream();
-        count++;
-        BufferedImage image = new BufferedImage(700,500, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics = image.createGraphics();
-        graphics.setFont(new Font("Serif", Font.ITALIC, 70));
-        graphics.setColor(Color.ORANGE);
-        graphics.drawString("Total number of visits",50, 150);
-        graphics.drawString(String.valueOf(count), 300, 300);
-        ImageIO.write(image, "jpeg", out);
-        writeCount(count);
+        File outputDir = new File(filePath);
+
+        try {
+            if (!outputDir.getParentFile().exists()) {
+                if (!outputDir.getParentFile().mkdirs()) {
+                    throw new FileNotFoundException();
+                }
+            }else{
+                if (readCount() == 0) {
+                    count = 0;
+                } else {
+                    count = readCount();
+                }
+            }
+            resp.setContentType("image/jpeg");
+            count++;
+            BufferedImage image = new BufferedImage(700,500, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics = image.createGraphics();
+            graphics.setFont(new Font("Serif", Font.ITALIC, 70));
+            graphics.setColor(Color.ORANGE);
+            graphics.drawString("Total number of visits",50, 150);
+            graphics.drawString(String.valueOf(count), 300, 300);
+            ServletOutputStream out = resp.getOutputStream();
+            ImageIO.write(image, "jpeg", out);
+            writeCount(count);
+        } catch (FileNotFoundException e) {
+            PrintWriter writer = resp.getWriter();
+            writer.printf("Could not find or create such directory: %s", outputDir.getParent());
+        }
+
     }
 
     @Override

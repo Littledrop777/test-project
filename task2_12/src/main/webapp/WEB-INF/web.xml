@@ -5,6 +5,6 @@
          version="4.0">
     <context-param>
         <param-name>logFile</param-name>
-        <param-value>count2.txt</param-value>
+        <param-value>resources\count2.txt</param-value>
     </context-param>
 </web-app>

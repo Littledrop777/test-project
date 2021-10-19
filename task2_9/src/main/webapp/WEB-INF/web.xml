@@ -7,7 +7,11 @@
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>by.academy.it.CounterServlet</servlet-class>
         <init-param>
-            <param-name>logFile</param-name>
+            <param-name>logFilePath</param-name>
+            <param-value>resources</param-value>
+        </init-param>
+        <init-param>
+            <param-name>logFileName</param-name>
             <param-value>count1.txt</param-value>
         </init-param>
     </servlet>
