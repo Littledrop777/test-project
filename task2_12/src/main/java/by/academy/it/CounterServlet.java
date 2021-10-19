@@ -32,7 +32,7 @@ public class CounterServlet extends HttpServlet {
                 if (!outputDir.getParentFile().mkdirs()) {
                     throw new FileNotFoundException();
                 }
-            }else{
+            } else {
                 if (readCount() == 0) {
                     count = 0;
                 } else {
@@ -41,11 +41,11 @@ public class CounterServlet extends HttpServlet {
             }
             resp.setContentType("image/jpeg");
             count++;
-            BufferedImage image = new BufferedImage(700,500, BufferedImage.TYPE_INT_RGB);
+            BufferedImage image = new BufferedImage(700, 500, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics = image.createGraphics();
             graphics.setFont(new Font("Serif", Font.ITALIC, 70));
             graphics.setColor(Color.ORANGE);
-            graphics.drawString("Total number of visits",50, 150);
+            graphics.drawString("Total number of visits", 50, 150);
             graphics.drawString(String.valueOf(count), 300, 300);
             ServletOutputStream out = resp.getOutputStream();
             ImageIO.write(image, "jpeg", out);

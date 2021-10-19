@@ -18,7 +18,6 @@ public class CounterServlet extends HttpServlet {
         super.init(config);
         filePath = config.getInitParameter("logFilePath");
         fileName = config.getInitParameter("logFileName");
-
     }
 
     @Override
@@ -47,7 +46,6 @@ public class CounterServlet extends HttpServlet {
         } catch (FileNotFoundException e) {
             out.printf("Could not find or create such directory: %s", filePath);
         }
-
     }
 
     @Override
