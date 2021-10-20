@@ -1,4 +1,4 @@
-package by.academy.it;
+package by.academy.it.oldImplWithLib;
 
 import eu.bitwalker.useragentutils.UserAgent;
 import jakarta.servlet.ServletException;
