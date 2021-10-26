@@ -1,7 +1,5 @@
 package by.academy.it;
 
-
-import eu.bitwalker.useragentutils.UserAgent;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
