@@ -10,12 +10,6 @@ public interface ExpenseService {
 
     List<Expense> findAll();
 
-    Expense findById(Integer num);
-
-    void update(Expense expense);
-
-    void delete(Integer num);
-
     static ExpenseService retrieve() {
         return ExpenseServiceImpl.getInstance();
     }

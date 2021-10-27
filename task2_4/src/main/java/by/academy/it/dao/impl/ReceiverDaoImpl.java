@@ -20,9 +20,7 @@ public class ReceiverDaoImpl implements ReceiverDao {
 
     private static final String SAVE_SQL = "insert into receiver (r_name) values ('%s') ";
     private static final String FIND_ALL_SQL = "select num, r_name from receiver";
-    private static final String UPDATE_SQL = "update receiver set r_name = %s where num = %d ";
-    private static final String DELETE_SQL = "delete from receiver where num = %d ";
-    private static final String FIND_BY_FILTER_SQL = "select num, r_name from receiver where %s = %d ";
+    private static final String FIND_BY_NAME_SQL = "select num, r_name from receiver where r_name = '%s' ";
 
     private static final String NUM_COLUMN = "num";
     private static final String NAME_COLUMN = "r_name";
@@ -71,50 +69,10 @@ public class ReceiverDaoImpl implements ReceiverDao {
     }
 
     @Override
-    public Optional<Receiver> findByNum(int num) {
-        try (Connection connection = connectionManager.open();
-             Statement statement = connection.createStatement()) {
-            String sql = String.format(FIND_BY_FILTER_SQL, NUM_COLUMN, num);
-            ResultSet resultSet = statement.executeQuery(sql);
-            Receiver receiver = null;
-            if (resultSet.next()) {
-                receiver = mapResultSet(resultSet);
-            }
-            return Optional.ofNullable(receiver);
-        } catch (SQLException e) {
-            throw new DaoException("FindAll method failed", e);
-        }
-    }
-
-    @Override
-    public void update(Receiver receiver) {
-        try (Connection connection = connectionManager.open();
-             Statement statement = connection.createStatement()) {
-            String sql = String.format(UPDATE_SQL,
-                    receiver.getName(),
-                    receiver.getNum());
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new DaoException("Update entity unsuccessful", e);
-        }
-    }
-
-    @Override
-    public void delete(int num) {
-        try (Connection connection = connectionManager.open();
-             Statement statement = connection.createStatement()) {
-            String sql = String.format(DELETE_SQL, num);
-            statement.executeQuery(sql);
-        } catch (SQLException e) {
-            throw new DaoException("Entity deletion failed", e);
-        }
-    }
-
-    @Override
     public Optional<Receiver> findByName(String name) {
         try (Connection connection = connectionManager.open();
              Statement statement = connection.createStatement()) {
-            String sql = String.format(DELETE_SQL, NAME_COLUMN, name);
+            String sql = String.format(FIND_BY_NAME_SQL, name);
             ResultSet resultSet = statement.executeQuery(sql);
             Receiver receiver = null;
             if (resultSet.next()) {
