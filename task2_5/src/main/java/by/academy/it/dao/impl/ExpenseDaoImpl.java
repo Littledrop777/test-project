@@ -17,7 +17,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
     private static final String SAVE_SQL = "insert into expense (pay_date, receiver_num, pay_value) values (?, ?, ?)";
     private static final String FIND_ALL_SQL =
-            "SELECT ex.num, ex.pay_date, receiver_num, rec.r_name, ex.pay_value from expense ex " +
+            "SELECT ex.num, ex.pay_date, rec.num, rec.r_name, ex.pay_value from expense ex " +
                     "JOIN receiver rec ON rec.num = ex.receiver_num";
     private static final String NUM_COLUMN = "num";
     private static final String DATE_COLUMN = "pay_date";

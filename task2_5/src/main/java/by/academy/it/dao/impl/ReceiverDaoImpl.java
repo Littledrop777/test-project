@@ -8,6 +8,7 @@ import by.academy.it.model.Receiver;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ReceiverDaoImpl implements ReceiverDao {
 
@@ -16,6 +17,8 @@ public class ReceiverDaoImpl implements ReceiverDao {
 
     private static final String SAVE_SQL = "insert into receiver (r_name) values (?) ";
     private static final String FIND_ALL_SQL = "select num, r_name from receiver";
+    private static final String FIND_BY_NAME_SQL = "select num, r_name from receiver where r_name = ? ";
+
     private static final String NUM_COLUMN = "num";
     private static final String NAME_COLUMN = "r_name";
 
@@ -43,6 +46,22 @@ public class ReceiverDaoImpl implements ReceiverDao {
             return receiver;
         } catch (SQLException e) {
             throw new DaoException("Receiver saving unsuccessful", e);
+        }
+    }
+
+    @Override
+    public Optional<Receiver> findByName(String name) {
+        try (Connection connection = connectionManager.open();
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME_SQL)) {
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Receiver receiver = null;
+            if (resultSet.next()) {
+                receiver = mapResultSet(resultSet);
+            }
+            return Optional.ofNullable(receiver);
+        } catch (SQLException e) {
+            throw new DaoException("FindByName method failed", e);
         }
     }
 

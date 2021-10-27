@@ -8,6 +8,8 @@ public interface ReceiverService {
 
     Receiver save(Receiver receiver);
 
+    Receiver findByName(String name);
+
     List<Receiver> findAll();
 
     static ReceiverService retrieve() {

@@ -9,6 +9,7 @@ import java.util.List;
 public class ReceiverServiceImpl implements ReceiverService {
 
     private static final String NULL_EXPENSE_MSG = "Receiver can not be null";
+    private static final String ENTITY_WITH_NUM_NULL_MSG = "Receiver can not be with name null";
     private static ReceiverServiceImpl instance;
     private final ReceiverDao receiverDao;
 
@@ -29,6 +30,15 @@ public class ReceiverServiceImpl implements ReceiverService {
             throw new UnknownEntityException(NULL_EXPENSE_MSG);
         }
         return receiverDao.save(receiver);
+    }
+
+    @Override
+    public Receiver findByName(String name) {
+        if (name == null) {
+            throw new UnknownEntityException(ENTITY_WITH_NUM_NULL_MSG);
+        }
+        return receiverDao.findByName(name)
+                .orElse(null);
     }
 
     @Override
