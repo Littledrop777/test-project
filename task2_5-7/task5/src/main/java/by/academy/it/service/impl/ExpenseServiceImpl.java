@@ -1,8 +1,9 @@
-package by.academy.it.service;
+package by.academy.it.service.impl;
 
 import by.academy.it.dao.ExpenseDao;
 import by.academy.it.exception.UnknownEntityException;
 import by.academy.it.model.Expense;
+import by.academy.it.service.ExpenseService;
 
 import java.util.List;
 

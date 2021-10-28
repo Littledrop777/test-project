@@ -1,6 +1,7 @@
 package by.academy.it.service;
 
 import by.academy.it.model.Receiver;
+import by.academy.it.service.impl.ReceiverServiceImpl;
 
 import java.util.List;
 

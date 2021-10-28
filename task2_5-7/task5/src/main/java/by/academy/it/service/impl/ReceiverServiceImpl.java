@@ -1,8 +1,9 @@
-package by.academy.it.service;
+package by.academy.it.service.impl;
 
 import by.academy.it.dao.ReceiverDao;
 import by.academy.it.exception.UnknownEntityException;
 import by.academy.it.model.Receiver;
+import by.academy.it.service.ReceiverService;
 
 import java.util.List;
 
