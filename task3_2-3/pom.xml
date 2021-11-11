@@ -7,8 +7,10 @@
     <groupId>by.academy.it</groupId>
     <artifactId>task3_2-3</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
+        <hibernate.version>5.6.1.Final</hibernate.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,12 +27,12 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.26</version>
+            <version>8.0.25</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.6.1.Final</version>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -38,12 +40,32 @@
             <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <finalName>task3</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.3.5</version>
+                <executions>
+                    <execution>
+                        <id>create_prod_db</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306/people?createDatabaseIfNotExist=true</url>
+                            <username>root</username>
+                            <password>root</password>
+                            <driver>com.mysql.cj.jdbc.Driver</driver>
+                            <changeLogFile>src/main/resources/changelog-person.xml</changeLogFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -70,7 +92,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>by.academy.it.Main</mainClass>
+                            <mainClass>by.academy.it.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
