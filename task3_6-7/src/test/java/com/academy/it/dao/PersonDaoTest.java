@@ -5,7 +5,6 @@ import com.academy.it.model.Address;
 import com.academy.it.model.Company;
 import com.academy.it.model.Person;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 

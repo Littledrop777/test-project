@@ -61,9 +61,9 @@ public class PersonDao {
 
     public PersonDataDto findPersonWithAllDataById(Long id) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery(FIND_BY_ID_ALL_DATA_SQL);
+        Query<PersonDataDto> query = session.createQuery(FIND_BY_ID_ALL_DATA_SQL, PersonDataDto.class);
         query.setParameter("person_id", id);
-        PersonDataDto person = (PersonDataDto) query.uniqueResult();
+        PersonDataDto person = query.uniqueResult();
         session.close();
         return person;
     }
