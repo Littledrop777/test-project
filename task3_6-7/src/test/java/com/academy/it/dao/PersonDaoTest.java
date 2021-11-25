@@ -5,6 +5,7 @@ import com.academy.it.model.Address;
 import com.academy.it.model.Company;
 import com.academy.it.model.Person;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +36,7 @@ public class PersonDaoTest extends BaseTest {
         Serializable id = dao.savePerson(person);
         assertNotNull(id);
         assertEquals(id, person.getId());
+        dao.deletePerson(person.getId());
     }
 
     @Test
@@ -47,6 +49,7 @@ public class PersonDaoTest extends BaseTest {
         Person personWithId = dao.findById(id);
         assertNotNull(personWithId);
         assertEquals(id, personWithId.getId());
+        dao.deletePerson(person.getId());
     }
 
     @Test
@@ -63,6 +66,8 @@ public class PersonDaoTest extends BaseTest {
         PersonDataDto personWithAllData = dao.findPersonWithAllDataById(id);
         assertNotNull(personWithAllData);
         assertEquals(id, personWithAllData.getId());
+        companyDao.deleteCompany(company.getId());
+        dao.deletePerson(person.getId());
     }
 
     @Test
@@ -78,5 +83,8 @@ public class PersonDaoTest extends BaseTest {
         Long id = (Long) dao.savePerson(person);
         dao.deletePerson(id);
         assertNull(dao.findById(id));
+        companyDao.deleteCompany(company.getId());
+        dao.deletePerson(person.getId());
     }
+
 }

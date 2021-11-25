@@ -2,6 +2,8 @@ package com.academy.it.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class Person {
     private String surname;
     @Setter
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Address address;
     @Setter
     @ManyToOne
