@@ -12,7 +12,7 @@ public class BaseTest {
     @BeforeClass
     public static void init() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("hibernate_per_class-test.cfg.xml")
+                .configure("hibernate_per_subclass-test.cfg.xml")
                 .build();
         sessionFactory = new MetadataSources(registry)
                 .buildMetadata()

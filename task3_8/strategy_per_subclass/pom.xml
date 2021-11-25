@@ -10,6 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>strategy_per_subclass</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>by.academy.it</groupId>
+            <artifactId>strategy_per_class</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
