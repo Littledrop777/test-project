@@ -1,40 +1,40 @@
 package by.exlab.shire_test.entity;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
-@ToString(exclude = "chatMessages")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user_chat")
-public class UserChat extends AuditingEntity<Long>{
+@Table(name = "message")
+public class Message implements BaseEntity<Long> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @ManyToOne(fetch = FetchType.LAZY)
-  private AppUser firstUser;
+  private AppUser sender;
   @ManyToOne(fetch = FetchType.LAZY)
-  private AppUser secondUser;
-  @Builder.Default
-  @OneToMany(mappedBy = "userChat")
-  private List<ChatMessage> chatMessages = new ArrayList<>();
+  private AppUser recipient;
+  private String content;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Chat chat;
+  private LocalDateTime createTime;
 
+  public void setChat(Chat chat) {
+    this.chat = chat;
+    this.chat.getMessages().add(this);
+  }
 }
