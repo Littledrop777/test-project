@@ -15,15 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.ToString;
 
 @Data
+@ToString(exclude = "chatMessages")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "user_chat")
-public class UserChat implements BaseEntity<Long>{
+public class UserChat extends AuditingEntity<Long>{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,6 @@ public class UserChat implements BaseEntity<Long>{
   private AppUser secondUser;
   @Builder.Default
   @OneToMany(mappedBy = "userChat")
-  private List<Chat> chats = new ArrayList<>();
-  private Instant createDate;
+  private List<ChatMessage> chatMessages = new ArrayList<>();
 
 }

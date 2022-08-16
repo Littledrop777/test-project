@@ -15,15 +15,17 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(of = "email")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "app_user")
-public class AppUser implements BaseEntity<Long> {
+public class AppUser extends AuditingEntity<Long> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +36,5 @@ public class AppUser implements BaseEntity<Long> {
   private String password;
   @Enumerated(EnumType.STRING)
   private Role role;
-  @Builder.Default
-  @OneToMany(mappedBy = "appUser")
-  private List<Chat> chats = new ArrayList<>();
-  private Instant createDate;
-  private Instant updateDate;
 
 }

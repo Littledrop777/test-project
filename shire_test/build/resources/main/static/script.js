@@ -3,7 +3,7 @@ function connect() {
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		console.log("connected: " + frame);
-		stompClient.subscribe('/chat/messages', function(response) {
+		stompClient.subscribe('/chat/messages', function(response) {  //добавить chatId
 			var data = JSON.parse(response.body);
 			draw("left", data.message);
 		});
@@ -12,9 +12,9 @@ function connect() {
 
 function draw(side, text) {
 	console.log("drawing...");
-    var $chat;  //message
-    $chat = $($('.message_template').clone().html());   //message
-    $chat.addClass(side).find('.text').html(text);   //message
+    var $chat;
+    $chat = $($('.message_template').clone().html());
+    $chat.addClass(side).find('.text').html(text);
     $('.messages').append($chat);
     return setTimeout(function () {
         return $chat.addClass('appeared');

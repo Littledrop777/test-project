@@ -1,9 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: org.springframework.boot.loader.WarLauncher
-Start-Class: by.exlab.shire_test.ShireTestApplication
-Spring-Boot-Version: 2.7.2
-Spring-Boot-Classes: WEB-INF/classes/
-Spring-Boot-Lib: WEB-INF/lib/
-Spring-Boot-Classpath-Index: WEB-INF/classpath.idx
-Spring-Boot-Layers-Index: WEB-INF/layers.idx
 

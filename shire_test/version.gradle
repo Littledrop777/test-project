@@ -1,0 +1,9 @@
+ext{
+    versions = [
+            'springdoc': '1.6.9',
+            'sockjs': '1.5.1',
+            'stomp': '2.3.4',
+            'bootstrap': '5.1.3',
+            'jquery': '3.6.0'
+    ]
+}

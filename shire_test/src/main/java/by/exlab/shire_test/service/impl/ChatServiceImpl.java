@@ -2,9 +2,10 @@ package by.exlab.shire_test.service.impl;
 
 import by.exlab.shire_test.dao.ChatDao;
 import by.exlab.shire_test.dao.UserChatDao;
-import by.exlab.shire_test.entity.Chat;
+import by.exlab.shire_test.entity.ChatMessage;
 import by.exlab.shire_test.entity.UserChat;
 import by.exlab.shire_test.service.ChatService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,12 @@ public class ChatServiceImpl implements ChatService {
   }
 
   @Override
-  public Chat save(Chat chat) {
-    return chatDao.save(chat);
+  public ChatMessage save(ChatMessage chatMessage) {
+    return chatDao.save(chatMessage);
+  }
+
+  @Override
+  public List<ChatMessage> findAllByUserChatId(Long userChatId) {
+    return chatDao.findAllByUserChatId(userChatId);
   }
 }

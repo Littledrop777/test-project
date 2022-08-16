@@ -12,33 +12,29 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "chat")
-public class Chat implements BaseEntity<Long> {
+@Table(name = "chat_message")
+public class ChatMessage implements BaseEntity<Long> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String message;
   @ManyToOne(fetch = FetchType.LAZY)
-  private AppUser appUser;
+  private AppUser sender;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private AppUser recipient;
   @ManyToOne(fetch = FetchType.LAZY)
   private UserChat userChat;
   private LocalDateTime createTime;
 
-  public void setAppUser(AppUser appUser) {
-    this.appUser = appUser;
-    this.appUser.getChats().add(this);
-  }
-
   public void setUserChat(UserChat userChat) {
     this.userChat = userChat;
-    this.userChat.getChats().add(this);
+    this.userChat.getChatMessages().add(this);
   }
 }
