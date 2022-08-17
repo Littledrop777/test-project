@@ -1,10 +1,10 @@
 package by.exlab.shire_test.dao;
 
-import by.exlab.shire_test.entity.Message;
-import java.util.List;
+import by.exlab.shire_test.entity.Chat;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChatDao extends JpaRepository<Message, Long> {
+public interface ChatDao extends JpaRepository<Chat, Long> {
 
-  List<Message> findAllByUserChatId(Long userChatId);
+  Optional<Chat> findByFirstUserIdAndSecondUserId(Long senderUserId, Long receiverUserId);
 }

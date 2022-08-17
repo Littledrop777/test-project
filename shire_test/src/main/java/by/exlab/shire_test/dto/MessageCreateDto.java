@@ -10,5 +10,5 @@ public class MessageCreateDto {
   Long senderId;
   Long recipientId;
   String content;
-  LocalDateTime createTime;
+//  LocalDateTime createTime;
 }
