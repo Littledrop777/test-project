@@ -30,13 +30,13 @@ public class MessageCreateMapper implements Mapper<MessageCreateDto, Message> {
         .build();
   }
 
-  private AppUser getAppUser(Long id){
+  private AppUser getAppUser(Long id) {
     return Optional.of(id)
         .flatMap(appUserDao::findById)
         .orElseThrow(EntityNotFoundException::new);
   }
 
-  private Chat getChat(Long id){
+  private Chat getChat(Long id) {
     return Optional.of(id)
         .flatMap(chatDao::findById)
         .orElseThrow(EntityNotFoundException::new);

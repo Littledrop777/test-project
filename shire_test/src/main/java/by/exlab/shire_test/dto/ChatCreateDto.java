@@ -7,5 +7,6 @@ public class ChatCreateDto {
 
   Long firstUserId;
   Long secondUserId;
+  Long cardId;
 
 }

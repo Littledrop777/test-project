@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS app_user
 );
 
 -- changeset aplehanova:2
-CREATE TABLE IF NOT EXISTS user_chat
+CREATE TABLE IF NOT EXISTS chat
 (
     id             BIGSERIAL PRIMARY KEY,
     first_user_id  BIGSERIAL REFERENCES app_user (id),
@@ -24,13 +24,13 @@ CREATE TABLE IF NOT EXISTS user_chat
 );
 
 -- changeset aplehanova:3
-CREATE TABLE IF NOT EXISTS chat_message
+CREATE TABLE IF NOT EXISTS message
 (
     id           BIGSERIAL PRIMARY KEY,
-    user_chat_id BIGSERIAL NOT NULL REFERENCES user_chat (id),
+    user_chat_id BIGSERIAL NOT NULL REFERENCES chat (id),
     sender_id    BIGSERIAL NOT NULL REFERENCES app_user (id),
     recipient_id BIGSERIAL NOT NULL REFERENCES app_user (id),
-    message      TEXT,
+    content      TEXT,
     create_time  TIMESTAMP NOT NULL
 );
 
