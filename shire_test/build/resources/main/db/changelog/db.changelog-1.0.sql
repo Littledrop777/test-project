@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS chat
     second_user_id BIGSERIAL REFERENCES app_user (id),
     created_at     TIMESTAMP,
     modified_at    TIMESTAMP,
-        UNIQUE (first_user_id, second_user_id)
+    UNIQUE (first_user_id, second_user_id)
 
 );
 
@@ -27,10 +27,11 @@ CREATE TABLE IF NOT EXISTS chat
 CREATE TABLE IF NOT EXISTS message
 (
     id           BIGSERIAL PRIMARY KEY,
-    user_chat_id BIGSERIAL NOT NULL REFERENCES chat (id),
+    chat_id      BIGSERIAL NOT NULL REFERENCES chat (id),
     sender_id    BIGSERIAL NOT NULL REFERENCES app_user (id),
     recipient_id BIGSERIAL NOT NULL REFERENCES app_user (id),
     content      TEXT,
     create_time  TIMESTAMP NOT NULL
 );
+
 

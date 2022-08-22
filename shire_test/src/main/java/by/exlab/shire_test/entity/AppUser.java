@@ -36,8 +36,5 @@ public class AppUser extends AuditingEntity<Long> {
   private String password;
   @Enumerated(EnumType.STRING)
   private Role role;
-  @Builder.Default
-  @OneToMany(mappedBy = "appUser")
-  private List<Card> cards = new ArrayList<>();
 
 }

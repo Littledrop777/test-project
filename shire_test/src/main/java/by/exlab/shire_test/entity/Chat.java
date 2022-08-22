@@ -32,10 +32,8 @@ public class Chat extends AuditingEntity<Long>{
   private AppUser firstUser;
   @ManyToOne(fetch = FetchType.LAZY)
   private AppUser secondUser;
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Card card;
   @Builder.Default
-  @OneToMany(mappedBy = "userChat")
+  @OneToMany(mappedBy = "chat")
   private List<Message> messages = new ArrayList<>();
 
 }
